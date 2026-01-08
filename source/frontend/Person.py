@@ -68,3 +68,6 @@ class QPerson(QtWidgets.QWidget):
 
         self.person.add_record(record_info.record)
         self.records_container.add_record(record_info)
+
+    def delete_record(self, record: QRecord):
+        self.person.remove_record(record.record)

@@ -150,15 +150,19 @@ class QRecord(QtWidgets.QWidget):
             self.update()
 
     def mouseDoubleClickEvent(self, event: QtGui.QMouseEvent) -> None:
-        self.record.content += " (edited)"
-        self.update()
+        # change the record content
+        text, ok = QtWidgets.QInputDialog.getText(
+            self,
+            "Edit Record",
+            "Record Content:",
+            QtWidgets.QLineEdit.EchoMode.Normal,
+            self.record.content,
+        )
+        if ok:
+            self.record.content = text
+            self.update()
         return super().mouseDoubleClickEvent(event)
 
     def delete_record(self):
-        parent = self.parent()
-        if isinstance(parent, QtWidgets.QWidget):
-            parent_layout = parent.layout()
-            if parent_layout is not None:
-                parent_layout.removeWidget(self)
-        self.setParent(None)
-        self.deleteLater()
+        # send signal to parent to delete this record
+        pass
