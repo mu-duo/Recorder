@@ -55,8 +55,16 @@ class QPerson(QtWidgets.QWidget):
         layout.addWidget(button)
         self.setLayout(layout)
 
+        self.load_records()
+
+    def load_records(self):
+        for record in self.person.records:
+            record_info = QRecord(self, record)
+            self.records_container.add_record(record_info)
+
     def add_record(self):
         record_info = QRecord(self)
         record_info.set_text("content")
 
+        self.person.add_record(record_info.record)
         self.records_container.add_record(record_info)

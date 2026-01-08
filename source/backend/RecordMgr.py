@@ -25,12 +25,15 @@ class RecordMgr:
         else:
             print(f"Loading data from {data_file}")
 
-        with open(data_file, "r", encoding="utf-8") as f:
-            data = json.load(f)
+        try:
+            with open(data_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
 
-        for person_data in data.get("persons", []):
-            person = Person.load(person_data)
-            self.persons.append(person)
+            for person_data in data.get("persons", []):
+                person = Person.load(person_data)
+                self.persons.append(person)
+        except Exception as e:
+            print(f"Failed to load data from {data_file}: {e}")
 
     def save(self, data_file=None):
         if data_file is None:

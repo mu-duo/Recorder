@@ -40,13 +40,23 @@ class RecorderApp_(QWidget):
         layout = QtWidgets.QVBoxLayout()
         self.setLayout(layout)
 
-        layout.addWidget(QPerson(self, Person("tlf")))
+        self.tabWidget = QtWidgets.QTabWidget(self)
+        self.mune = QtWidgets.QMenuBar(self)
+        layout.addWidget(self.mune)
+        layout.addWidget(self.tabWidget)
 
-    def add_person(self, person: Person):
-        person_widget = QPerson(self, person)
-        layout = self.layout()
-        if layout is not None:
-            layout.addWidget(person_widget)
+        if not self.manager.persons:
+            self.manager.persons.append(Person("Default Person"))
+
+        for person in self.manager.persons:
+            self.tabWidget.addTab(QPerson(self, person), person.name)
+
+    def add_person(self):
+        person = Person("New Person")
+        self.manager.add_person(person)
+        person_tab = QPerson(self, person)
+        self.tabWidget.addTab(person_tab, person.name)
+        self.tabWidget.setCurrentWidget(person_tab)
 
 
 class RecorderApp:
