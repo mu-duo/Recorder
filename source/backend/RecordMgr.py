@@ -48,4 +48,3 @@ class RecordMgr:
             json.dump(data, f, ensure_ascii=False, indent=4)
             print(f"data: {data}")
 
-        print(f"Data saved to {data_file}")

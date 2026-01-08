@@ -3,7 +3,6 @@ import datetime
 
 class Record:
     def __init__(self, parent=None, content=""):
-        self.parent = parent
         self.content = content
 
         # get the date form now
@@ -17,13 +16,10 @@ class Record:
     def reset(self):
         self.birth_date = datetime.datetime.now().date()
 
-    def get_parent(self):
-        return self.parent
-
     @staticmethod
-    def test():
+    def GenerateNewRecord():
         record = Record()
-        record.birth_date = datetime.datetime.now().date() - datetime.timedelta(days=5)
+        record.birth_date = datetime.datetime.now().date()
         record.content = "Test Record"
         return record
 
@@ -33,7 +29,9 @@ class Record:
         record.content = data.get("content", "")
         birth_date_str = data.get("birth_date", "")
         try:
-            record.birth_date = datetime.datetime.strptime(birth_date_str, "%Y-%m-%d").date()
+            record.birth_date = datetime.datetime.strptime(
+                birth_date_str, "%Y-%m-%d"
+            ).date()
         except ValueError:
             record.birth_date = datetime.datetime.now().date()
         return record

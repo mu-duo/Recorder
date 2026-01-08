@@ -69,7 +69,7 @@ class QRecord(QtWidgets.QWidget):
 
         # data
         if record is None:
-            record = Record.test()
+            record = Record.GenerateNewRecord()
         self.record = record
 
         # ui
@@ -166,5 +166,4 @@ class QRecord(QtWidgets.QWidget):
 
     def delete_record(self):
         # send signal to parent to delete this record
-        print("Emitting DELETE_SIGNAL from QRecord")
         self.DELETE_SIGNAL.emit(self)

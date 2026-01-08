@@ -31,7 +31,6 @@ class QRecordContainer(QtWidgets.QWidget):
         self.container_layout.addWidget(record)
 
     def delete_record(self, record: QRecord):
-        print("Call delete record by QRecordContainer")
         self.container_layout.removeWidget(record)
         record.setParent(None)
 
@@ -74,6 +73,5 @@ class QPerson(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def delete_record(self, record: QRecord):
-        print("Call delete record by QPerson")
         self.person.remove_record(record.record)
         self.records_container.delete_record(record)
