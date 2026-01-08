@@ -1,7 +1,7 @@
 from PySide6 import QtCore, QtGui, QtWidgets
 
 from source.backend.Record import Record
-
+from PySide6.QtCore import Signal
 
 class QRecordMenu(QtWidgets.QMenu):
     def __init__(self, parent=None):
@@ -63,6 +63,7 @@ class QRecordMenu(QtWidgets.QMenu):
 
 
 class QRecord(QtWidgets.QWidget):
+    DELETE_SIGNAL = Signal(object)  # signal to notify parent to delete this record
     def __init__(self, parent=None, record=None):
         super().__init__(parent)
 
@@ -165,4 +166,5 @@ class QRecord(QtWidgets.QWidget):
 
     def delete_record(self):
         # send signal to parent to delete this record
-        pass
+        print("Emitting DELETE_SIGNAL from QRecord")
+        self.DELETE_SIGNAL.emit(self)
