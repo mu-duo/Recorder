@@ -45,6 +45,12 @@ class RecorderApp_(QWidget):
         layout.addWidget(self.mune)
         layout.addWidget(self.tabWidget)
 
+        button = QtWidgets.QPushButton("Add Person")
+        button.setFont(QtGui.QFont("Arial", 12))
+        button.setFixedHeight(40)
+        button.clicked.connect(self.add_person)
+        layout.addWidget(button)
+
         if not self.manager.persons:
             self.manager.persons.append(Person("Default Person"))
 
